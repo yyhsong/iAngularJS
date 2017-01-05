@@ -1,0 +1,42 @@
+<form class="pure-form pure-form-stacked">
+	<div class="pure-g">
+		<div class="pure-u-1-2">
+			<label>Search: </label>
+			<input type="text" class="pure-u-1-1" ng-model="queryVal" />
+		</div>
+		<div class="pure-u-1-2">
+			<label>Order by: </label>
+			<select class="pure-u-1-1" ng-model="orderProp">
+				<option value="votes">票数</option>
+				<option value="name">姓名</option>
+			</select>
+		</div>
+	</div>
+</form>
+
+<div class="pure-g">
+	<div class="pure-u-1-1">
+		<table class="pure-table pure-table-horizontal">
+			<thead>
+				<tr>
+					<th></th>
+					<th>姓名</th>
+					<th>位置</th>
+					<th>号码</th>
+					<th>球队</th>
+					<th>票数</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="player in players | filter:queryVal | orderBy:orderProp">
+					<td><img ng-src="static/img/players/{{player.thumb}}" class="pure-img" /></td>
+					<td><a href="#/player/{{player.id}}">{{player.name}}</a></td>
+					<td>{{player.position}}</td>
+					<td>{{player.num}}</td>
+					<td>{{player.team}}</td>
+					<td>{{player.votes}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

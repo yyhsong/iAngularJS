@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Dependency Injector</title>
+	</head>
+	<body>
+		<div ng-controller="AppController">
+			<h3>Application Message: </h3>
+			{{message}}
+		</div>
+		
+		<div ng-controller="ModController">
+			<h3>Module Message: </h3>
+			{{message}}
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			var myMod = angular.module("myMod", []);
+			myMod.value("modMsg", "Hello from Module");
+			myMod.controller("ModController", ["$scope", "modMsg", function($scope, msg) {
+				$scope.message = msg;
+			}]);
+			
+			var myApp = angular.module("myApp", ["myMod"]);
+			myApp.value("appMsg", "Hello from Application");
+			myApp.controller("AppController", ["$scope", "appMsg", function($scope, msg) {
+				$scope.message = msg;
+			}]);
+		</script>
+	</body>
+</html>

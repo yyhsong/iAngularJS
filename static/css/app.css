@@ -1,0 +1,15 @@
+html,body {background-color:#DFDFDF;}
+a {color:#0000ff;}
+
+.header {position:fixed;top:0;left:0;width:100%;height:40px;background-color:#666;}
+.header-title {margin-left:15px;line-height:40px;font-size:18px;color:#fcfcfc;}
+
+.container {position:absolute;top:55px;bottom:15px;left:10%;width:80%;background-color:#fff;}
+.content {height:100%;overflow:auto;}
+
+.pure-g>div {padding:15px;box-sizing:border-box;}
+.pure-g .pure-table {width:100%;}
+.pure-g .pure-table .pure-img {max-width:48px;max-height:48px;}
+
+.con-center h3,
+.con-center p {margin:10px;text-align:center;}

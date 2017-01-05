@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html ng-app="voteApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>AngularJS Demo Project</title>
+		<link rel="stylesheet" type="text/css" href="static/css/pure-0.6.min.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/app.css" />
+	</head>
+	<body>
+		<header class="header">
+			<span class="header-title">NBA All-Star Voting</span>
+		</header>
+		
+		<div class="container">
+			<div class="content" ng-view></div>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript" src="static/js/angular-route.js"></script>
+		<script type="text/javascript" src="app/app.js"></script>
+		<script type="text/javascript" src="app/controllers/voteController.js"></script>
+	</body>
+</html>
