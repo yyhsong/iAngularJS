@@ -7,7 +7,7 @@
 		<div class="pure-u-1-2">
 			<label>Order by: </label>
 			<select class="pure-u-1-1" ng-model="orderProp">
-				<option value="votes">票数</option>
+				<option value="-votes">票数</option>
 				<option value="name">姓名</option>
 			</select>
 		</div>
@@ -28,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="player in players | filter:queryVal | orderBy:orderProp:true">
+				<tr ng-repeat="player in players | filter:queryVal | orderBy:orderProp">
 					<td><img ng-src="static/img/players/{{player.thumb}}" class="pure-img" /></td>
 					<td><a href="#/player/{{player.id}}">{{player.name}}</a></td>
 					<td>{{player.position}}</td>

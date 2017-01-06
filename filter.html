@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Filter - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+			table {table-layout:fixed;border-collapse:collapse;width:600px;}
+			th, td {padding:5px;border:1px solid #ccc;}
+			th {background-color:#CAD2D3;cursor:pointer;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			<h3>点击表头排序</h3>
+			<table>
+				<tr>
+					<th ng-click="orderCol('name')">Name</th>
+					<th ng-click="orderCol('country')">Country</th>
+				</tr>
+				<tr ng-repeat="user in users | orderBy: orderProp">
+					<td>{{user.name}}</td>
+					<td>{{user.country}}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * Filters can be added in AngularJS to format/transform data:
+			 * filter: Select a subset of items from an array.
+			 * orderBy: Orders an array by an expression.
+			 * limitTo: Limits an array/string, into a specified number of elements/characters.
+			 * json: Format an object to a JSON string.
+			 * date: Format a date to a specified format.
+			 * currency: Format a number to a currency format.
+			 * number: Format a number to a string.
+			 * lowercase: Format a string to lower case.
+			 * uppercase: Format a string to upper case.
+			 */
+			
+			angular.module("myApp", []).controller("myCtrl", function($scope) {
+				$scope.users = [
+					{name:'Jani',country:'Norway'},
+				    {name:'Carl',country:'Sweden'},
+				    {name:'Margareth',country:'England'},
+				    {name:'Hege',country:'Norway'},
+				    {name:'Joe',country:'Denmark'},
+				    {name:'Gustav',country:'Sweden'},
+				    {name:'Birgit',country:'Denmark'},
+				    {name:'Mary',country:'England'},
+				    {name:'Kai',country:'Norway'}
+				];
+				$scope.orderCol = function(o) {
+					$scope.orderProp = o;
+				};
+			});
+		</script>
+	</body>
+</html> 

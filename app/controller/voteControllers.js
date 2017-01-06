@@ -3,7 +3,7 @@ function playerListCtrl($scope, $http) {
 	$http.get("data/players.json").success(function(data) {
 		$scope.players = data;
 	});
-	$scope.orderProp = "votes";
+	$scope.orderProp = "-votes"; //默认按票数降序排列
 }
 
 //Detail Controller
