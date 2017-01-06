@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Service - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			<p>URL: {{pageUrl}}</p>
+			<p>url: {{pageUrl2 | myFilter}}</p>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * In AngularJS, a service is a function, or object, that is available for, and limited to, your AngularJS application.
+			 * AngularJS has about 30 built-in services.
+			 * In order to use the service in the controller, it must be defined as a dependency.
+			 */
+			/**
+			 * Once you have created a service, and connected it to your application, 
+			 * you can use the service in any controller, directive, filter, or even inside other services.
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			
+			//自定义Service
+			myApp.service("myService", function() {
+				this.toUpper = function(val) {
+					return val.toUpperCase();
+				};
+				this.toLower = function(val) {
+					return val.toLowerCase();
+				};
+			});
+			
+			//在Filter中使用Service
+			myApp.filter("myFilter", function(myService) {
+				return function(val) {
+					return myService.toLower(val);
+				};
+			});
+			
+			//在Controller中注入Service
+			myApp.controller("myCtrl", function($scope, $location, $timeout, myService) {
+				$scope.pageUrl = $scope.pageUrl2 = $location.absUrl();
+				$timeout(function() {
+					$scope.pageUrl = myService.toUpper($scope.pageUrl);
+				}, 3000)
+			});
+		</script>
+	</body>
+</html> 
