@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html ng-app="">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Model - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+			input.ng-invalid {border-color:red;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div">
+			<form name="myForm">
+				Email:
+				<input type="email" name="myEmail" ng-model="myEmail" />
+				<span ng-show="myForm.myEmail.$error.email">Not a valid email address</span>
+			</form>
+		</div>
+		
+		<div class="test-div">
+			<form name="myForm2" ng-init="myEmail2='12345@qq.com'">
+				Email: 
+				<input type="email" name="myEmail2" ng-model="myEmail2" required />
+				<p>Valid: {{myForm2.myEmail2.$valid}}</p>
+				<p>Dirty: {{myForm2.myEmail2.$dirty}}</p>
+				<p>Touched: {{myForm2.myEmail2.$touched}}</p>
+			</form>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * The ng-model directive binds the value of HTML controls (input, select, textarea) to application data.
+			 * The ng-model directive can provide type validation for application data (number, e-mail, required).
+			 * The ng-model directive can provide status for application data (valid, dirty, touched, error).
+			 * The ng-model directive provides CSS classes for HTML elements, depending on their status:
+			 * ng-empty
+			 * ng-not-empty
+			 * ng-touched
+			 * ng-untouched
+			 * ng-valid
+			 * ng-invalid
+			 * ng-dirty
+			 * ng-pending
+			 * ng-pristine
+			 */
+		</script>
+	</body>
+</html> 
