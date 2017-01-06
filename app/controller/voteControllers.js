@@ -7,7 +7,7 @@ function playerListCtrl($scope, $http) {
 }
 
 //Detail Controller
-function playerDetailCtrl($scope, $http, $routeParams) {
+function playerViewCtrl($scope, $http, $routeParams) {
 	$http.get("data/players.json").success(function(data) {
 		var i = parseInt($routeParams.playerId)-1;
 		$scope.player = data[i];

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Directive - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div">
+			<ul ng-init="users=[{firstName:'Neo',lastName:'Huang'},{firstName:'Shelly',lastName:'Lee'}]">
+				<li ng-repeat="user in users">
+					{{user.firstName + " " + user.lastName}}
+				</li>
+			</ul>
+		</div>
+		
+		<div class="test-div">
+			<my-test-directive></my-test-directive>
+		</div>
+		
+		<div class="test-div">
+			<p my-test-directive></p>
+		</div>
+		
+		<div class="test-div">
+			<p class="my-test-directive"></p>
+		</div>
+		
+		<div class="test-div">
+			<!-- directive: my-test-directive -->
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * AngularJS lets you extend HTML with new attributes called Directives.
+			 * AngularJS has a set of built-in directives which offers functionality to your applications.
+			 * AngularJS also lets you define your own directives.
+			 * AngularJS directives are extended HTML attributes with the prefix ng-
+			 */
+			
+			/**
+			 * Common Built-in Directives: 
+			 * ng-app
+			 * ng-init
+			 * ng-bind
+			 * ng-controller
+			 * ng-model
+			 * ng-repeat
+			 * ng-click
+			 * ng-src
+			 * ...
+			 */
+			
+			/**
+			 * Create New Directive:
+			 * New directives are created by using the .directive function.
+			 * When naming a directive, you must use a camel case name, myTestDirective, 
+			 * but when invoking it, you must use - separated name, my-test-directive
+			 */
+			
+			/**
+			 * Invoke a directive by using:
+			 * E: Element name
+			 * A: Attribute
+			 * C: Class
+			 * M: Comment
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			myApp.directive("myTestDirective", function() {
+				return {
+					restrict: "A", //default: EA
+					//replace: true, //false: the comment would be invisible
+					template: "<h3>Hello Directive</h3>"
+				};
+			});
+		</script>
+	</body>
+</html> 

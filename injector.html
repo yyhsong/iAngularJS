@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>Dependency Injector</title>
+		<title>Dependency Injector - AngularJS Test</title>
 	</head>
 	<body>
 		<div ng-controller="AppController">
@@ -19,6 +19,7 @@
 		
 		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
 		<script type="text/javascript">
+			//依赖注入
 			var myMod = angular.module("myMod", []);
 			myMod.value("modMsg", "Hello from Module");
 			myMod.controller("ModController", ["$scope", "modMsg", function($scope, msg) {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Module - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			<p>
+				FullName:
+				{{firstName + " " + lastName}}
+			</p>
+		</div>
+		
+		<div class="test-div" my-directive="">
+			
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/*
+			 * An AngularJS module defines an application.
+			 * The module is a container for the different parts of an application.
+			 * The module is a container for the application controllers.
+			 * Controllers always belong to a module.
+			 */
+		
+			//Create a Module
+			//The [] parameter in the module definition can be used to define dependent modules.
+			//Without the [] parameter, you are not creating a new module, but retrieving an existing one.
+			var myApp = angular.module("myApp", []);
+			
+			//Create a Controller
+			myApp.controller("myCtrl", function($scope) {
+				$scope.firstName = "Neo";
+				$scope.lastName = "Huang";
+			});
+			
+			//Create a Directive
+			myApp.directive("myDirective", function() {
+				return {
+					template: "I was created in directive constructor!"
+				};
+			});
+		</script>
+	</body>
+</html> 

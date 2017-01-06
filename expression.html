@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html ng-app="">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Expression - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-init="bgColor='lightblue'">
+			<input type="text" style="background-color:{{bgColor}}" ng-model="bgColor" value="{{bgColor}}" />
+		</div>
+		
+		<div class="test-div" ng-init="num1=2;num2=5">
+			<p>积：{{num1 * num2}}</p>
+			<p>和：<span ng-bind="num1 + num2"></span></p>
+		</div>
+		
+		<div class="test-div" ng-init="firstName='Neo';lastName='Huang'">
+			<p>FullName: {{firstName + " " + lastName}}</p>
+			<p>FullName: <span ng-bind="firstName + ' ' +lastName"></span></p>
+		</div>
+		
+		<div class="test-div" ng-init="user={userName:'Neo',age:32}">
+			<p>User: {{user.userName}}</p>
+			<p>Age: <span ng-bind="user.age"></span></p>
+		</div>
+		
+		<div class="test-div" ng-init="colors=['red','green','blue']">
+			<p>The first color is {{colors[0]}}</p>
+			<p>The last color is <span ng-bind="colors[2]"></span></p>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			//Angular表达式基本形式：{{expression}} or ng-bind="expression"
+			//与JS表达式相似，Angular表达式可以包含文本、操作符和变量
+			//Angular Number,String,Object,Array like JS
+			//Angular表达式可以写在页面任何地方，Angular对其进行解析并返回结果
+			//Angular表达式支持过滤（Filter）,但不支持条件、循环和异常处理
+			//初始化变量通常放在Controller中，而不是使用ng-init指令
+		</script>
+	</body>
+</html>

@@ -28,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="player in players | filter:queryVal | orderBy:orderProp">
+				<tr ng-repeat="player in players | filter:queryVal | orderBy:orderProp:true">
 					<td><img ng-src="static/img/players/{{player.thumb}}" class="pure-img" /></td>
 					<td><a href="#/player/{{player.id}}">{{player.name}}</a></td>
 					<td>{{player.position}}</td>

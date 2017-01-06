@@ -7,11 +7,11 @@ angular.module("voteApp").config(["$routeProvider", function($routeProvider) {
 		templateUrl: "tmpl/player/list.html",
 		controller: playerListCtrl
 	}).when("/player/:playerId", {
-		templateUrl: "tmpl/player/detail.html",
-		controller: playerDetailCtrl
+		templateUrl: "tmpl/player/view.html",
+		controller: playerViewCtrl
 	}).when("/player/:playerId/:playerName", {
-		templateUrl: "tmpl/player/detail.html",
-		controller: playerDetailCtrl
+		templateUrl: "tmpl/player/view.html",
+		controller: playerViewCtrl
 	}).otherwise({
 		redirectTo: "/player/list"
 	});
