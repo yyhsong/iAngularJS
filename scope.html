@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Scope - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div">
+			The Root Scope color is: {{color}}
+		</div>
+		
+		<div class="test-div" ng-controller="myCtrl">
+			The Current Scope color is: {{color}}
+		</div>
+		
+		<div class="test-div">
+			The Root Scope color is still: {{color}}
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * A controller is a JavaScript Object, created by a standard JavaScript object constructor.
+			 * AngularJS will invoke the controller with a $scope object.
+			 * $scope is the application object (the owner of application variables and functions).
+			 * 
+			 * The scope is the binding part between the HTML (view) and the JavaScript (controller).
+			 * The scope is an object with the available properties and methods.
+			 * The scope is available for both the view and the controller.
+			 * 
+			 * For larger applications there can be sections in the HTML DOM which can only access certain scopes.
+			 * It is important to know which scope you are dealing with, at any time.
+			 * The $rootScope is available in the entire application.
+			 * If a variable has the same name in both the current scope and in the rootScope, the application use the one in the current scope.
+			 */
+			
+			var myApp =  angular.module("myApp", []);
+			myApp.run(function($rootScope) {
+				$rootScope.color =  "Red";
+			});
+			myApp.controller("myCtrl", function($scope) {
+				$scope.color = "Blue";
+			});
+		</script>
+	</body>
+</html> 
