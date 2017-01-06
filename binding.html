@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Data Binding - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			<h3 ng-click="changeName()">{{userName}}</h3>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * Data binding in AngularJS is the synchronization between the model and the view.
+			 * When data in the model changes, the view reflects the change, 
+			 * and when data in the view changes, the model is updated as well. 
+			 * This happens immediately and automatically, which makes sure that the model and the view is updated at all times.
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			myApp.controller("myCtrl", function($scope) {
+				$scope.userName = "Neo";
+				$scope.changeName = function() {
+					$scope.userName = "Shelly";
+				};
+			});
+		</script>
+	</body>
+</html> 
