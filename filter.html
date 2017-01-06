@@ -21,8 +21,8 @@
 					<th ng-click="orderCol('country')">Country</th>
 				</tr>
 				<tr ng-repeat="user in users | orderBy: orderProp">
-					<td>{{user.name}}</td>
-					<td>{{user.country}}</td>
+					<td>{{user.name | uppercase}}</td>
+					<td>{{user.country | myFilter}}</td>
 				</tr>
 			</table>
 		</div>
@@ -42,7 +42,15 @@
 			 * uppercase: Format a string to upper case.
 			 */
 			
-			angular.module("myApp", []).controller("myCtrl", function($scope) {
+			var  myApp = angular.module("myApp", []);
+			//自定义Filter
+			myApp.filter("myFilter", function() {
+				return function(val) {
+					return val + "@";
+				}
+			});
+			
+			myApp.controller("myCtrl", function($scope) {
 				$scope.users = [
 					{name:'Jani',country:'Norway'},
 				    {name:'Carl',country:'Sweden'},
