@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>$http - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			{{respData}}
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * $http is an AngularJS service for reading data from remote servers.
+			 * The AngularJS $http service makes a request to the server, and returns a response.
+			 * $http service several shortcut methods:
+			 * .delete()
+			 * .get()
+			 * .head()
+			 * .jsonp()
+			 * .patch()
+			 * .post()
+			 * .put()
+			 * 
+			 * The response from the server is an object with these properties:
+			 * .config the object used to generate the request.
+			 * .data a string, or an object, carrying the response from the server.
+			 * .headers a function to use to get header information.
+			 * .status a number defining the HTTP status.
+			 * .statusText a string defining the HTTP status.
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			myApp.controller("myCtrl", function($scope, $http) {
+				$http({
+					method: "GET",
+					url: "data/players.json"
+				}).then(function mySuccess(resp) {
+					$scope.respData = resp.data;
+				}, function myError(resp) {
+					$scope.respData = resp.statusText;
+				});
+			});
+		</script>
+	</body>
+</html> 
