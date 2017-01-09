@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Form - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+			input.ng-invalid {background-color:#FFFF00;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div">
+			<form>
+				Pick a car: <br />
+				<input type="radio" name="car" ng-model="myCar" value="Benz" /> 奔驰 <br />
+				<input type="radio" name="car" ng-model="myCar" value="BMW" /> 宝马 <br />
+				<input type="radio" name="car" ng-model="myCar" value="Audi" /> 奥迪 
+			</form>
+			<p>You have selected: {{myCar}}</p>
+		</div>
+		
+		<div class="test-div" ng-controller="myCtrl">
+			<form name="myForm" action="#" novalidate>
+				<p>
+					First Name: <input type="text" name="firstName" ng-model="user.firstName" required />
+					<span ng-show="myForm.firstName.$touched && myForm.firstName.$invalid" style="color:red;">First Name is required.</span>
+				</p>
+				<p>
+					Last Name: <input type="text" name="lastName" ng-model="user.lastName" required />
+					<span ng-show="myForm.lastName.$touched && myForm.lastName.$invalid" style="color:red;">Last Name is required.</span>
+				</p>
+				<p>
+					Email: <input type="email" name="myEmail" ng-model="myEmail" required />
+					<span ng-show="myForm.myEmail.$touched && myForm.myEmail.$invalid" style="color:red;">
+						<span ng-show="myForm.myEmail.$error.required">Email is required.</span>
+						<span ng-show="myForm.myEmail.$error.email">Invalid email format.</span>
+					</span>
+				</p>
+				<p>
+					Phone: <input type="text" name="myPhone" ng-model="myUrl" my-val-directive />
+					<span ng-show="myForm.myPhone.$dirty && myForm.myPhone.$invalid" style="color:red;">Invalid phone number.</span>
+				</p>
+				<button ng-click="resetForm()">Reset</button>
+			</form>
+			<p>form = {{user}}</p>
+			<p>origin = {{origin}}</p>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * Forms in AngularJS provides data-binding and validation of input controls: input select button textarea.
+			 * AngularJS offers client-side form validation.
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			
+			//使用指令自定义表单验证规则
+			myApp.directive("myValDirective", function() {
+			    return {
+				    require: "ngModel",
+				    link: function(scope, element, attr, mCtrl) {
+				        function myValidation(value) {
+				        	if (/^1[34578]\d{9}$/.test(value)) {
+				            	mCtrl.$setValidity('charE', true);
+				        	} else {
+				            	mCtrl.$setValidity('charE', false);
+				        	}
+				        	return value;
+				        }
+				        mCtrl.$parsers.push(myValidation);
+				    }
+			    };
+			});
+			
+			myApp.controller("myCtrl", function($scope) {
+				$scope.origin = {"firstName":"Neo","lastName":"Huang"};
+				$scope.resetForm = function() {
+					$scope.user = angular.copy($scope.origin);
+				};
+				$scope.resetForm();
+			});
+		</script>
+	</body>
+</html> 
