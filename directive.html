@@ -13,7 +13,8 @@
 		<div class="test-div">
 			<ul ng-init="users=[{firstName:'Neo',lastName:'Huang'},{firstName:'Shelly',lastName:'Lee'}]">
 				<li ng-repeat="user in users">
-					{{user.firstName + " " + user.lastName}}
+					<p ng-if="$even" style="color:red;">{{$index+1}} : {{user.firstName + " " + user.lastName}}</p>
+					<p ng-if="$odd" style="color:blue;">{{$index+1}} : {{user.firstName + " " + user.lastName}}</p>
 				</li>
 			</ul>
 		</div>

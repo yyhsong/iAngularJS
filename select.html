@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Select - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl1">
+			<select ng-model="selectedCar">
+				<option ng-repeat="car in cars" value="{{car.brand}}">{{car.name}}</option>
+			</select>
+			<p>Selected Car: {{selectedCar}}</p>
+		</div>
+		
+		<div class="test-div" ng-controller="myCtrl2">
+			<select ng-model="selectedColor" ng-options="color for color in colors"></select>
+			<p>Selected Color: {{selectedColor}}</p>
+		</div>
+		
+		<div class="test-div" ng-controller="myCtrl3">
+			<select ng-model="selectedCar" ng-options="car.brand for car in cars"></select>
+			<p>Selected: {{selectedCar.color}} {{selectedCar.name}}</p>
+		</div>
+		
+		<div class="test-div" ng-controller="myCtrl4">
+			<select ng-model="selectedCar" ng-options="x for (x, y) in cars"></select>
+			<p>Selected: {{selectedCar.color}} {{selectedCar.name}}</p>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * Dropdowns made with ng-options allows the selected value to be an object, 
+			 * while dropdowns made from ng-repeat has to be a string.
+			 * When the selected value can be an object, it can hold more information, and your application can be more flexible.
+			 * 
+			 * Using an object as the data source, x represents the key, and y represents the value: x for (x, y) in
+			 * The selected value will always be the value in a key-value pair.
+			 * The value in a key-value pair can also be an object.
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			
+			myApp.controller("myCtrl1", function($scope) {
+				$scope.cars = [
+					{brand:"BMW",name:"宝马"},
+					{brand:"Benz",name:"奔驰"},
+					{brand:"Audi",name:"奥迪"}
+				];
+			});
+			
+			myApp.controller("myCtrl2", function($scope) {
+				$scope.colors = ["Red", "Green", "Blue"];
+			});
+			
+			myApp.controller("myCtrl3", function($scope) {
+				$scope.cars = [
+					{brand:"BMW",name:"宝马",color:"Red"},
+					{brand:"Benz",name:"奔驰",color:"Green"},
+					{brand:"Audi",name:"奥迪",color:"Blue"}
+				];
+			});
+			
+			myApp.controller("myCtrl4", function($scope) {
+				$scope.cars = {
+					BMW: {name:"宝马",color:"红色"},
+					Benz: {name:"奔驰",color:"蓝色"},
+					Audi: {name:"奥迪",color:"绿色"}
+				};
+			});
+		</script>
+	</body>
+</html> 
