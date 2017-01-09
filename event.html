@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Event - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-init="mySwitch=true">
+			<p>
+				<button ng-disabled="mySwitch">Click Me</button>
+			</p>
+			<p>
+				<input type="checkbox" ng-model="mySwitch" /> 禁用
+			</p>
+			<p>
+				{{mySwitch}}
+			</p>
+		</div>
+		
+		<div class="test-div" ng-init="hour=24">
+			<p ng-show="hour>=23">It's time to sleep!</p>
+			<p ng-hide="false">OK!</p>
+		</div>
+		
+		<div class="test-div" ng-init="count=0">
+			<h2 ng-mouseover="count = count + 1">Mouse over count: {{count}}</h2>
+		</div>
+		
+		<div class="test-div" ng-controller="myCtrl">
+			<h2 ng-click="myFunc($event)">Mouse click count: {{count}}</h2>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * You can pass the $event object as an argument when calling the function.
+			 * The $event object contains the browser's event object.
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			myApp.controller("myCtrl", function($scope) {
+				$scope.count = 0;
+				$scope.myFunc = function(e) {
+					$scope.count++;
+					console.log("Event Object: " , e)
+				};
+			});
+		</script>
+	</body>
+</html> 
