@@ -1,0 +1,55 @@
+<form name="playerForm" class="pure-form pure-form-aligned" novalidate autocomplete="off">
+	<fieldset>
+		<legend>新增球员信息</legend>
+		
+		<div class="pure-control-group">
+			<label>姓名</label>
+			<input type="text" name="name" ng-model="player.name" required />
+			<span class="val-error" ng-show="playerForm.name.$touched && playerForm.name.$invalid">
+				必须填写球员姓名
+			</span>
+			<span class="val-error" ng-show="isExisted">
+				该球员已存在
+			</span>
+		</div>
+		
+		<div class="pure-control-group">
+			<label>号码</label>
+			<input type="text" name="num" ng-model="player.num" required val-player-num />
+			<span class="val-error" ng-show="playerForm.num.$touched && playerForm.num.$invalid">
+				<span ng-show="playerForm.num.$error.required">必须填写球员号码</span>
+				<span ng-show="playerForm.num.$error.playerNum">球员号码必须是0~99之间的整数</span>
+			</span>
+		</div>
+		
+		<div class="pure-control-group">
+			<label>位置</label>
+			<select name="position" ng-model="player.position" required>
+				<option ng-repeat="pos in positions" value="{{pos.val}}">{{pos.txt}}</option>
+			</select>
+			<span class="val-error" ng-show="playerForm.position.$touched && playerForm.position.$invalid">
+				请选择球员位置
+			</span>
+		</div>
+		
+		<div class="pure-control-group">
+			<label>球队</label>
+			<select name="team" ng-model="player.team" ng-options="team for team in teams" required></select>
+			<span class="val-error" ng-show="playerForm.team.$touched && playerForm.team.$invalid">
+				请选择球员所在球队
+			</span>
+		</div>
+		
+		<div class="pure-control-group">
+			<label>头像</label>
+			<input type="file" name="thumb" ng-model="player.thumb" />
+		</div>
+		
+		<div class="pure-controls">
+			<input type="submit" value="保存" class="pure-button pure-button-primary"
+				ng-click="submitForm()"
+				ng-disabled="playerForm.$invalid" />
+			<a href="#/player/list" class="pure-button">取消</a>
+		</div>
+	</fieldset>
+</form>

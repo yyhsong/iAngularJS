@@ -39,8 +39,11 @@
 					</span>
 				</p>
 				<p>
-					Phone: <input type="text" name="myPhone" ng-model="myUrl" my-val-directive />
-					<span ng-show="myForm.myPhone.$dirty && myForm.myPhone.$invalid" style="color:red;">Invalid phone number.</span>
+					Phone: <input type="text" name="myPhone" ng-model="myPhone" required my-val-directive />
+					<span ng-show="myForm.myPhone.$touched && myForm.myPhone.$invalid" style="color:red;">
+						<span ng-show="myForm.myPhone.$error.required">Phone is required.</span>
+						<span ng-show="myForm.myPhone.$error.phone">Invalid Phone format.</span>
+					</span>
 				</p>
 				<button ng-click="resetForm()">Reset</button>
 			</form>
@@ -64,9 +67,9 @@
 				    link: function(scope, element, attr, mCtrl) {
 				        function myValidation(value) {
 				        	if (/^1[34578]\d{9}$/.test(value)) {
-				            	mCtrl.$setValidity('charE', true);
+				            	mCtrl.$setValidity('phone', true);
 				        	} else {
-				            	mCtrl.$setValidity('charE', false);
+				            	mCtrl.$setValidity('phone', false);
 				        	}
 				        	return value;
 				        }

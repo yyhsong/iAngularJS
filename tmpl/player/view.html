@@ -1,11 +1,13 @@
 <div class="con-center">
 	<p><img ng-src="static/img/players/{{player.thumb}}" ng-click="getThumb(player.thumb)" /></p>
 	<h3>姓名：{{player.name}}</h3>
-	<p>位置：{{player.position}}</p>
+	<p>位置：{{player.position | posFilter}}</p>
 	<p>号码：{{player.num}}</p>
 	<p>球队：{{player.team}}</p>
 	<p>票数：{{player.votes}}</p>
 	<p>
+		<button class="pure-button pure-button-primary" 
+			ng-disabled="isVoted" ng-click="vote()">{{voteBtnText}}</button>
 		<a href="#/player/list" class="pure-button">返回</a>
 	</p>
 </div>

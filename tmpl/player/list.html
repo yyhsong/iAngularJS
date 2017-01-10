@@ -14,8 +14,11 @@
 	</div>
 </form>
 
-<div class="pure-g">
+<div class="pure-g" style="margin-top:-25px;">
 	<div class="pure-u-1-1">
+		<p>
+			<a href="#/player/add" class="pure-button pure-button-primary">新增候选球员</a>
+		</p>
 		<table class="pure-table pure-table-horizontal">
 			<thead>
 				<tr>
@@ -25,16 +28,21 @@
 					<th>号码</th>
 					<th>球队</th>
 					<th>票数</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="player in players | filter:queryVal | orderBy:orderProp">
 					<td><img ng-src="static/img/players/{{player.thumb}}" class="pure-img" /></td>
-					<td><a href="#/player/{{player.id}}">{{player.name}}</a></td>
-					<td>{{player.position}}</td>
+					<td><a href="#/player/view/{{player.id}}">{{player.name}}</a></td>
+					<td>{{player.position | posFilter}}</td>
 					<td>{{player.num}}</td>
 					<td>{{player.team}}</td>
 					<td>{{player.votes}}</td>
+					<td>
+						<a href="#/player/edit/{{player.id}}">编辑</a>
+						<a href="#" ng-click="removePlayer($event, player.id)">删除</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
