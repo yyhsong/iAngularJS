@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Ajax - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			<button ng-click="loadData()">Load Data</button>
+			<div>
+				{{result}}
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * $httpProvider - $http
+			 * 使用$httpProvider可以修改全局Ajax配置，或者对Ajax请求进行拦截
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			myApp.config(function($httpProvider) {
+				$httpProvider.interceptors.push(function() {
+					return {
+						request: function(config) {
+							console.log("Request URL: " + config.url);
+							return config;
+						},
+						response: function(resp) {
+							console.log("Response Status: " + resp.status);
+							return resp;
+						}
+					}
+				});
+			});
+			myApp.controller("myCtrl", function($scope, $http) {
+				$scope.loadData = function() {
+					$http.get("data/players.json").then(function(resp) {
+						console.log("Data Length: " + resp.data.length);
+						$scope.result = resp.data;
+					}, function(resp) {
+						console.log("Resp Status: " + resp.status);
+						$scope.result = resp.status;
+					})
+				};
+			});
+		</script>
+	</body>
+</html> 
