@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Promise - AngularJS Test</title>
+		<style type="text/css">
+			.test-div {margin:15px;padding:15px;border:1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="test-div" ng-controller="myCtrl">
+			{{result}}
+		</div>
+		
+		<script type="text/javascript" src="static/js/angular-1.5.8.js"></script>
+		<script type="text/javascript">
+			/**
+			 * $q - A service that helps you run functions asynchronously,
+			 * and use their return values (or exceptions) when they are done processing.
+			 * 
+			 * $q -> defered -> promise
+			 */
+			
+			var myApp = angular.module("myApp", []);
+			
+			//使用factory()创建Service
+			myApp.factory("dataSer", function($http, $q) {
+				return {
+					getJson: function() {
+						//$http API is based on the deferred/promise APIs exposed by the $q service,
+	            		//so it returns a promise by default
+						return $http.get("data/player.json").then(function(resp) {
+							if(typeof resp.data === "object") {
+								return resp.data;
+							}else {
+								return $q.reject(resp.data);
+							}
+						}, function(resp) {
+							return $q.reject(resp.status);
+						});
+					}
+				};
+			});
+			
+			myApp.controller("myCtrl", function($scope, dataSer) {
+				//dataSer.getJson() returns a promise
+				dataSer.getJson().then(function(data) {
+					$scope.result = data;
+				}, function(error) {
+					$scope.result = error;
+				});
+			});
+		</script>
+	</body>
+</html> 
