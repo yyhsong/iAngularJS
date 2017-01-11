@@ -32,17 +32,20 @@ function playerAddCtrl($scope, $http, $location, voteSer) {
 	//提交表单
 	$scope.submitForm = function() {
 		//console.log("Submit Player Form: ", angular.toJson($scope.player));
-		if(voteSer.isExisted($scope.player.name)) { //判断该球员是否已存在
-			console.log("isExsited ...");
-			$scope.isExisted = true;
-			return;
-		}
-		$http.post("/backend/acitonUrl", $scope.player).then(function(resp) { //无论是否保存成功，都进行页面跳转
-			console.log("Saved Successfully! Status: " + resp.status);
-			$location.path("#/player/list");
-		}, function(resp) {
-			console.log("Saved Failly! Status: " + resp.status);
-			$location.path("#/player/list");
+		voteSer.getPlayerNames().then(function(data) {
+			//判断该球员姓名是否已存在
+			if(data.indexOf($scope.player.name) >= 0) {
+				$scope.isExisted = true;
+			}else {
+				//提交表单
+				$http.post("/backend/acitonUrl", $scope.player).then(function(resp) { //无论是否保存成功，都进行页面跳转
+					console.log("Saved Successfully! Status: " + resp.status);
+					$location.path("#/player/list");
+				}, function(resp) {
+					console.log("Saved Failly! Status: " + resp.status);
+					$location.path("#/player/list");
+				});
+			}
 		});
 	};
 }
